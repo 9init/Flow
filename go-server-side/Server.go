@@ -38,7 +38,6 @@ var clientOptions = options.Client().ApplyURI("mongodb://localhost:27017/Emovent
 func main() {
 
 	http.HandleFunc("/check", checkHandler)
-
 	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/login", loginHandler)
 

@@ -18,7 +18,6 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(1)
 	name, user, email, password := strings.TrimSpace(r.Header.Get("name")), strings.TrimSpace(r.Header.Get("user")), strings.TrimSpace(r.Header.Get("email")), r.Header.Get("password")
 	switch true {
 	case isEmbtyString(name):
