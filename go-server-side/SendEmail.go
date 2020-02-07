@@ -1,6 +1,8 @@
 package main
 
-import "net/smtp"
+import (
+	"net/smtp"
+)
 
 // smtpServer data to smtp server
 type smtpServer struct {
@@ -13,20 +15,24 @@ func (s *smtpServer) Address() string {
 	return s.host + ":" + s.port
 }
 
-func sendEmail(emailAddress, message string) (err error) {
-	from, password := "emovent2e@gmail.com", "ahahmasgm011"
-	to := []string{emailAddress}
+func sendEmail(emailAddress, message string) error {
+	from := "emovent2e@gmail.com"
+	password := "datwftuzeuooijom"
+	to := emailAddress
 
 	//prepare hosting server
 	_smtpServer := smtpServer{host: "smtp.gmail.com", port: "587"}
 
-	msg := []byte(message)
+	msg := "From: " + "Ahmed Hesham" + "\n" +
+		"To: " + to + "\n" +
+		"Subject: Test\n\n" +
+		message
 
 	//Authintication
-	auth := smtp.PlainAuth("Emovent", from, password, _smtpServer.host)
+	auth := smtp.PlainAuth("", from, password, _smtpServer.host)
 
 	//Sending Email
-	err = smtp.SendMail(_smtpServer.Address(), auth, from, to, msg)
+	err := smtp.SendMail(_smtpServer.Address(), auth, from, []string{to}, []byte(msg))
 
-	return
+	return err
 }
