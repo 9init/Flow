@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"strings"
 
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+//Constant data have to be declared HERE
 type userInfo struct {
 	Name        string
 	User        string
@@ -36,15 +36,10 @@ const (
 var clientOptions = options.Client().ApplyURI("mongodb://localhost:27017/Emovent/Flow")
 
 func main() {
-	http.HandleFunc("/register", registerHandler)
-	http.HandleFunc("/check", func(w http.ResponseWriter, r *http.Request) {
-		if strings.ToLower(r.Method) == "post" {
-			w.WriteHeader(http.StatusOK)
-			return
-		}
-		w.WriteHeader(404)
 
-	})
+	http.HandleFunc("/check", checkHandler)
+
+	http.HandleFunc("/register", registerHandler)
 	http.HandleFunc("/login", loginHandler)
 
 	fmt.Println("running")
